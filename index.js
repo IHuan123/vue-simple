@@ -1,8 +1,4 @@
-    //v1版
-    //data(实例的所有数据) el(绑定的元素) exp(需要绑定data中的那个属性)
-    // function SelfVue({ el, data, exp }) { 
-
-    /**
+     /**
      * vue双向绑定原理实现 参考（https://www.cnblogs.com/canfoo/p/6891868.html）
      * @param {*} options selfVue构造函数配置参数
      */
@@ -14,11 +10,6 @@
             self.proxyKeys(key);
         })
         new Observer(this.data); //监听data中所有数据
-        //v1
-        // el.innerHTML = this.data[exp]; // 初始化模板数据的值
-        // new Watcher(this, exp, function (value) {
-        //     el.innerHTML = value;
-        // });
         new Compile(options, this.vm);//使用new时 this为Compile
         return this;
     }
