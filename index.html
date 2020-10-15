@@ -29,19 +29,22 @@
         el:'#app',
         data:{
             name:'hello',
-            num:456
+            num:0
         },
     });
 
-    window.setTimeout(function () {
-        selfVue.name = 'one';
-    }, 1000);
-    window.setTimeout(function () {
-        selfVue.name = 'two';
-    }, 1500);
-    window.setTimeout(function () {
-        selfVue.name = 'third'
-    }, 2000);
+    // window.setTimeout(function () {
+    //     selfVue.name = 'one';
+    // }, 1000);
+    // window.setTimeout(function () {
+    //     selfVue.name = 'two';
+    // }, 1500);
+    // window.setTimeout(function () {
+    //     selfVue.name = 'third'
+    // }, 2000);
+    setInterval(function(){
+        selfVue.num++
+    },1000)
     // var ele2 = document.querySelector('#root');
     // nodeToFragment(ele2)
 </script>
