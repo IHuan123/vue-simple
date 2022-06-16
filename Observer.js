@@ -22,16 +22,16 @@ Observer.prototype = {
      */
     //将对象中每个属性设置为defineProperty
     defineReactive(data, key, value) {
-        //再次遍历对象中的子对象，如何为原型数据，则不执行，
+        //递归遍历对象中的子对象，如何为原型数据，则不执行，
         observe(value);
         let dep = new Dep(); //创建订阅者容器
         Object.defineProperty(data, key, {
             enumerable: true,
             configurable: true,
             get() {
-                if (Dep.target) { // 判断是否需要添加订阅者
-                    dep.add(Dep.target); // 在这里添加一个订阅者 
-                }
+                // 判断是否存在订阅者
+                if (Dep.target instanceof Watcher) dep.add(Dep.target); // 在这里添加一个订阅者 
+                console.log("Dep",dep,Dep.target)
                 return value;
             },
             set(newVal) {
@@ -45,15 +45,13 @@ Observer.prototype = {
 }
 //判断数据中的各数据类型 对象才执行
 function observe(value, vm) {
-    //如何为原型数据，则不执行
-    if (!value || typeof value !== 'object') {
-        return;
-    }
-    return new Observer(value);
+    //如果为原始数据，则不执行
+    if (!isObj(value)) return;
+    new Observer(value);
 };
 //收集订阅者
 function Dep() {
-    this.subs = [];
+    this.subs = []; //订阅者list
 }
 Dep.prototype = {
     //添加

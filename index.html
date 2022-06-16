@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="./utils/index.js"></script>
     <script src="./Observer.js"></script>
     <script src="./Watcher.js"></script>
     <script src="./Compile.js"></script>
     <script src="./index.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <div>{{ name }}</div>   
-        <div>
-            <div><span>111</span></div>
-            <span>{{num}}</span>             
-        </div> 
+      <h1>app1</h1>
+      <span>num:{{num}}</span>
+      <span>count:{{count}}</span>
     </div>
-
-</body>
-
+    <br />
+    <div id="app2">
+      <h1>app2</h1>
+      <span>num:{{num}}</span>
+      <span>count:{{count}}</span>
+    </div>
+  </body>
 </html>
 <script>
-    // var ele = document.querySelector('#app');
-    var selfVue = new SelfVue({
-        el:'#app',
-        data:{
-            name:'hello',
-            num:0
-        },
-    });
+  var selfVue = new SelfVue({
+    el: "#app",
+    data: {
+      num: 0,
+      count: 1,
+    },
+  });
+  setTimeout(function () {
+    selfVue.num++;
+    selfVue.count++;
+  }, 1000);
 
-    // window.setTimeout(function () {
-    //     selfVue.name = 'one';
-    // }, 1000);
-    // window.setTimeout(function () {
-    //     selfVue.name = 'two';
-    // }, 1500);
-    // window.setTimeout(function () {
-    //     selfVue.name = 'third'
-    // }, 2000);
-    setInterval(function(){
-        selfVue.num++
-    },1000)
-    // var ele2 = document.querySelector('#root');
-    // nodeToFragment(ele2)
+</script>
+<script>
+  var selfVue2 = new SelfVue({
+    el: "#app2",
+    data: {
+      num: 0,
+      count: 1,
+    },
+  });
+  setTimeout(function () {
+    selfVue2.num += 2;
+    selfVue2.count += 3;
+  }, 1000);
+
 </script>
